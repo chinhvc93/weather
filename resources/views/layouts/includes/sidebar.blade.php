@@ -11,18 +11,36 @@
     </div>
     <div class="sidebar-wrapper">
         <ul class="nav">
-            <li class="nav-item {{ request()->is('dashboard/import') ? 'active' : '' }}">
-                <a class="nav-link" href="{{route("home.import")}}">
+            <li class="nav-item {{ request()->is('data/import') ? 'active' : '' }}">
+                <a class="nav-link" href="{{route("data.import")}}">
                     <i class="material-icons">dashboard</i>
                     <p>Nhập dữ liệu</p>
                 </a>
             </li>
-            <li class="nav-item {{ request()->is('dashboard/analysis') ? 'active' : '' }} ">
-                <a class="nav-link" href="{{route("home.analysis")}}">
+            {{--<li class="nav-item {{ request()->is('dashboard/analysis') ? 'active' : '' }} ">--}}
+                {{--<a class="nav-link" href="{{route("home.analysis")}}">--}}
+                    {{--<i class="material-icons">content_paste</i>--}}
+                    {{--<p>Thống kê</p>--}}
+                {{--</a>--}}
+            {{--</li>--}}
+            <li class="nav-item {{ request()->is('analysis/by-days') ? 'active' : '' }} ">
+                <a class="nav-link" href="{{route("analysis.byDay")}}">
                     <i class="material-icons">content_paste</i>
-                    <p>Thống kê</p>
+                    <p>Thống kê theo ngày</p>
                 </a>
             </li>
+            {{--<li class="nav-item {{ request()->is('dashboard/analysis') ? 'active' : '' }} ">--}}
+                {{--<a class="nav-link" href="{{route("home.analysis")}}">--}}
+                    {{--<i class="material-icons">content_paste</i>--}}
+                    {{--<p>Thống kê theo giờ</p>--}}
+                {{--</a>--}}
+            {{--</li>--}}
+            {{--<li class="nav-item {{ request()->is('dashboard/analysis') ? 'active' : '' }} ">--}}
+                {{--<a class="nav-link" href="{{route("home.analysis")}}">--}}
+                    {{--<i class="material-icons">content_paste</i>--}}
+                    {{--<p>Thống kê theo phút</p>--}}
+                {{--</a>--}}
+            {{--</li>--}}
         </ul>
     </div>
 </div>

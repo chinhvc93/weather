@@ -10,40 +10,27 @@
                             <p class="card-category"></p>
                         </div>
                         <div class="card-body">
-                            <form action="{{route("home.actionAnalysis")}}" method="POST">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="bmd-label-floating">Chế độ xem</label>
-                                            <select class="form-control" name="type" id="">
-                                                <option value="day">Ngày</option>
-                                                <option value="hour">Giờ</option>
-                                                <option value="minute">Phút</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
+                            <form action="{{route("analysis.byDay")}}" method="GET">
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Từ</label>
-                                            <input type="date" class="form-control" name="start_date" min="2018-10-06"  min="2018-10-16" value="10/06/2018">
+                                            <input type="date" class="form-control" name="start_date" required min="2018-10-06"  max="2018-10-16" value="<?php echo date(old("start_date")); ?>">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Đến</label>
-                                            <input type="date" class="form-control" name="end_date" value="10/16/2018">
+                                            <input type="date" class="form-control" name="end_date" required min="2018-10-06"  max="2018-10-16" value="{{old("end_date")}}">
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        <button type="submit" class="btn btn-primary pull-right">Thực hiện</button>
+                                    </div>
                                 </div>
-
                                 @if(isset($days_avg))
-                                    @include('home.parts.day')
+                                    @include('analysis.parts.day')
                                 @endif
-
-                                <button type="submit" class="btn btn-primary pull-right">Thực hiện</button>
                                 <div class="clearfix"></div>
                             </form>
                         </div>

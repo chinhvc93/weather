@@ -33,6 +33,8 @@
 <script src="{{ asset('assets/js/plugins/arrive.min.js') }}"></script>
 <!-- Chartist JS -->
 <script src="{{ asset('assets/js/plugins/chartist.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+
 <!--  Notifications Plugin    -->
 <script src="{{ asset('assets/js/plugins/bootstrap-notify.js') }}"></script>
 <!-- Control Center for Material Dashboard: parallax effects, scripts for the example pages etc -->

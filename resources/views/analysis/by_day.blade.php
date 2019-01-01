@@ -15,13 +15,13 @@
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Từ</label>
-                                            <input type="date" class="form-control" name="start_date" required min="2018-10-06"  max="2018-10-16" value="<?php echo date(old("start_date")); ?>">
+                                            <input type="date" class="form-control" name="start_date" required value="{{app('request')->input("start_date")}}">
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="form-group">
                                             <label class="bmd-label-floating">Đến</label>
-                                            <input type="date" class="form-control" name="end_date" required min="2018-10-06"  max="2018-10-16" value="{{old("end_date")}}">
+                                            <input type="date" class="form-control" name="end_date" required value="{{app('request')->input("end_date")}}">
                                         </div>
                                     </div>
                                     <div class="col-md-4">

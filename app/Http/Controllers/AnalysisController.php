@@ -51,14 +51,14 @@ class AnalysisController extends Controller
         foreach ($dates as $date) {
             $date_data = Weather::where('date', '>=', $date . " 00:00:00")
                 ->where('date', '<', $date . " 23:59:59")->get();
-            $result["temperature"][] = $date_data->avg("temperature");
-            $result["humidity"][] = $date_data->avg("humidity");
-            $result["ph"][] = $date_data->avg("ph");
-            $result["soil_moisture"][] = $date_data->avg("soil_moisture");
-            $result["pir"][] = $date_data->avg("pir");
-            $result["ec_meter"][] = $date_data->avg("ec_meter");
-            $result["light"][] = $date_data->avg("light");
-            $result["pin"][] = $date_data->avg("pin");
+            $result["temperature"][] = format_number($date_data->avg("temperature"));
+            $result["humidity"][] = format_number($date_data->avg("humidity"));
+            $result["ph"][] = format_number($date_data->avg("ph"));
+            $result["soil_moisture"][] = format_number($date_data->avg("soil_moisture"));
+            $result["pir"][] = format_number($date_data->avg("pir"));
+            $result["ec_meter"][] = format_number($date_data->avg("ec_meter"));
+            $result["light"][] = format_number($date_data->avg("light"));
+            $result["pin"][] = format_number($date_data->avg("pin"));
         }
         return $result;
     }

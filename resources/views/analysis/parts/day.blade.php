@@ -29,41 +29,49 @@
                 data: temperature,
                 label: "Nhiệt độ",
                 borderColor: "#e30015",
+                hidden: false,
                 fill: false
             }, {
                 data: humidity,
                 label: "Độ ẩm",
                 borderColor: "#8e5ea2",
+                hidden: true,
                 fill: false
             }, {
                 data: ph,
                 label: "Độ PH",
                 borderColor: "#da5698",
+                hidden: true,
                 fill: false
             }, {
                 data: soil_moisture,
                 label: "Độ ẩm đất",
                 borderColor: "#ed5b39",
+                hidden: true,
                 fill: false
             }, {
                 data: pir,
                 label: "PIR",
                 borderColor: "#12c414",
+                hidden: true,
                 fill: false
             }, {
                 data: ec_meter,
                 label: "EC_meter",
                 borderColor: "#4c38c4",
+                hidden: true,
                 fill: false
             }, {
                 data: light,
                 label: "Ánh sáng",
                 borderColor: "#c41282",
+                hidden: true,
                 fill: false
             }, {
                 data: pin,
                 label: "Pin",
                 borderColor: "#2cbbc4",
+                hidden: true,
                 fill: false
             }
             ]

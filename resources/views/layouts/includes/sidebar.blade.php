@@ -6,7 +6,7 @@
   -->
     <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            Thời tiết
+            Project 3
         </a>
     </div>
     <div class="sidebar-wrapper">

@@ -10,26 +10,20 @@
                             <p class="card-category"></p>
                         </div>
                         <div class="card-body">
-                            <form action="{{route("analysis.byDay")}}" method="GET">
+                            <form action="{{route("analysis.byHour")}}" method="GET">
                                 <div class="row">
                                     <div class="col-md-2">
                                         <div class="form-group label-floating has-default">
-                                            <label class="control-label">Từ</label>
-                                            <input type="date" class="form-control" name="start_date" required value="{{app('request')->input("start_date")}}">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <div class="form-group label-floating has-default">
-                                            <label class="control-label">Đến</label>
-                                            <input type="date" class="form-control" name="end_date" required value="{{app('request')->input("end_date")}}">
+                                            <label class="control-label">Ngày</label>
+                                            <input type="date" class="form-control" name="date" required value="{{app('request')->input("date")}}">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <button type="submit" class="btn btn-primary pull-right">Thực hiện</button>
                                     </div>
                                 </div>
-                                @if(isset($days_avg))
-                                    @include('analysis.parts.day')
+                                @if(isset($hours_avg))
+                                    @include('analysis.parts.hour')
                                 @endif
                                 <div class="clearfix"></div>
                             </form>

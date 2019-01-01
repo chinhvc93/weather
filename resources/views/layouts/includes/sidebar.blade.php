@@ -29,18 +29,18 @@
                     <p>Thống kê theo ngày</p>
                 </a>
             </li>
-            {{--<li class="nav-item {{ request()->is('dashboard/analysis') ? 'active' : '' }} ">--}}
-                {{--<a class="nav-link" href="{{route("home.analysis")}}">--}}
-                    {{--<i class="material-icons">content_paste</i>--}}
-                    {{--<p>Thống kê theo giờ</p>--}}
-                {{--</a>--}}
-            {{--</li>--}}
-            {{--<li class="nav-item {{ request()->is('dashboard/analysis') ? 'active' : '' }} ">--}}
-                {{--<a class="nav-link" href="{{route("home.analysis")}}">--}}
-                    {{--<i class="material-icons">content_paste</i>--}}
-                    {{--<p>Thống kê theo phút</p>--}}
-                {{--</a>--}}
-            {{--</li>--}}
+            <li class="nav-item {{ request()->is('analysis/by-hours') ? 'active' : '' }} ">
+                <a class="nav-link" href="{{route("analysis.byHour")}}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Thống kê theo giờ</p>
+                </a>
+            </li>
+            <li class="nav-item {{ request()->is('analysis/by-minutes') ? 'active' : '' }} ">
+                <a class="nav-link" href="{{route("analysis.byMinute")}}">
+                    <i class="material-icons">content_paste</i>
+                    <p>Thống kê theo phút</p>
+                </a>
+            </li>
         </ul>
     </div>
 </div>

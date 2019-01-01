@@ -33,4 +33,6 @@ Route::prefix('data')->group(function () {
 Route::prefix('analysis')->group(function () {
     Route::get('/', 'AnalysisController@analysis')->name('analysis.analysis');
     Route::get('/by-days', 'AnalysisController@analysisByDay')->name('analysis.byDay');
+    Route::get('/by-hours', 'AnalysisController@analysisByHour')->name('analysis.byHour');
+    Route::get('/by-minutes', 'AnalysisController@analysisByMinute')->name('analysis.byMinute');
 });

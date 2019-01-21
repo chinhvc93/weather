@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('analysis.byDay');
 });
 
 Route::prefix('dashboard')->group(function () {
@@ -31,7 +31,7 @@ Route::prefix('data')->group(function () {
 });
 
 Route::prefix('analysis')->group(function () {
-    Route::get('/', 'AnalysisController@analysis')->name('analysis.analysis');
+    Route::get('/', 'AnalysisController@index')->name('analysis.index');
     Route::get('/by-days', 'AnalysisController@analysisByDay')->name('analysis.byDay');
     Route::get('/by-hours', 'AnalysisController@analysisByHour')->name('analysis.byHour');
     Route::get('/by-minutes', 'AnalysisController@analysisByMinute')->name('analysis.byMinute');

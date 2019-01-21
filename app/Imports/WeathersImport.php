@@ -16,6 +16,13 @@ class WeathersImport implements ToModel, WithBatchInserts, WithChunkReading, Wit
 {
     use Importable;
 
+    protected $node;
+
+    public function  __construct($node)
+    {
+        $this->node = $node;
+    }
+
     /**
      * @param array $row
      *
@@ -28,6 +35,7 @@ class WeathersImport implements ToModel, WithBatchInserts, WithChunkReading, Wit
         }
 
         return new Weather([
+            'node' => $this->node,
             'temperature' => $row[0],
             'humidity' => $row[1],
             'ph' =>  $row[2],

@@ -19,8 +19,7 @@ class AnalysisController extends Controller
 
     public function index()
     {
-        dd(1);
-        return view('home.index');
+        return redirect()->route('analysis.byDay');
     }
 
     //Tính trung bình theo ngày

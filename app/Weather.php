@@ -16,6 +16,6 @@ class Weather extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'temperature', 'humidity', 'ph', 'soil_moisture', 'pir', 'ec_meter', 'light', 'pin', 'date'
+        'node', 'temperature', 'humidity', 'ph', 'soil_moisture', 'pir', 'ec_meter', 'light', 'pin', 'date'
     ];
 }

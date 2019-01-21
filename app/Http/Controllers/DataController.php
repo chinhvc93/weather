@@ -22,7 +22,8 @@ class DataController extends Controller
     }
 
     public function actionImport(Request $request) {
-        Excel::import(new WeathersImport, request()->file('file'));
+        $node = $request->node;
+        Excel::import(new WeathersImport($node), request()->file('file'));
         return redirect('data/import')->with('success', 'All good!');
     }
 }

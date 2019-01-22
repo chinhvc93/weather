@@ -10,7 +10,7 @@
                                 <i class="material-icons">close</i>
                             </button>
                             <span>
-                      <b>Thành công</b> -  Nhập dữ liệu hoàn thành</span>
+                            <b>Thành công</b> -  Nhập dữ liệu hoàn thành</span>
                         </div>
                     </div>
                 </div>

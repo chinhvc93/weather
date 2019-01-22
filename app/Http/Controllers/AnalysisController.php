@@ -26,12 +26,18 @@ class AnalysisController extends Controller
     public function analysisByDay(Request $request)
     {
         if ($request->all()) {
+            $nodes1 = $request->nodes;
+            $element = $request->element;
             $start_date = Carbon::createFromTimeString($request->start_date . "00:00:00");
             $end_date = Carbon::createFromTimeString($request->end_date . "00:00:00");
-            $data = $this->getByDay($start_date, $end_date);
-            return view('analysis.by_day')->with("days_avg", $data);
+            $data = $this->getByDay($nodes1, $element, $start_date, $end_date);
+            return view('analysis.by_day')->with([
+                    "days_avg" => $data,
+                    "nodes" => Weather::select("node")->distinct()->get()
+                ]);
         }
-        return view('analysis.by_day');
+        $nodes = Weather::select("node")->distinct()->get();
+        return view('analysis.by_day')->with("nodes", $nodes);
     }
 
     //Tính trung bình theo giờ trong ngày
@@ -117,32 +123,24 @@ class AnalysisController extends Controller
         return $result;
     }
 
-    public function getByDay($start_date, $end_date)
+    public function getByDay($nodes, $element, $start_date, $end_date)
     {
         $dates = $this->generateDateRange($start_date, $end_date);
         $result = [];
         $result["day"] = $dates;
-        $result["temperature"] = [];
-        $result["humidity"] = [];
-        $result["ph"] = [];
-        $result["soil_moisture"] = [];
-        $result["pir"] = [];
-        $result["ec_meter"] = [];
-        $result["light"] = [];
-        $result["pin"] = [];
-
-        foreach ($dates as $date) {
-            $date_data = Weather::where('date', '>=', $date . " 00:00:00")
-                ->where('date', '<', $date . " 23:59:59")->get();
-            $result["temperature"][] = format_number($date_data->avg("temperature"));
-            $result["humidity"][] = format_number($date_data->avg("humidity"));
-            $result["ph"][] = format_number($date_data->avg("ph"));
-            $result["soil_moisture"][] = format_number($date_data->avg("soil_moisture"));
-            $result["pir"][] = format_number($date_data->avg("pir"));
-            $result["ec_meter"][] = format_number($date_data->avg("ec_meter"));
-            $result["light"][] = format_number($date_data->avg("light"));
-            $result["pin"][] = format_number($date_data->avg("pin"));
+        $result["element"] = [];
+        foreach ($nodes as $node) {
+            $date_element = [];
+            foreach ($dates as $date) {
+                $date_data = Weather::where('date', '>=', $date . " 00:00:00")
+                    ->where('date', '<', $date . " 23:59:59")
+                    ->where('node', "=", $node)
+                    ->get();
+                $date_element[] = format_number($date_data->avg($element));
+            }
+            $result["element"][$node] = $date_element;
         }
+
         return $result;
     }
 

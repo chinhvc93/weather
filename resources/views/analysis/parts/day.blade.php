@@ -11,70 +11,27 @@
 @push("scripts")
 <script type="text/javascript">
     var day = @json($days_avg["day"]);
-    var temperature = @json($days_avg["temperature"]);
-    var humidity = @json($days_avg["humidity"]);
-    var ph = @json($days_avg["ph"]);
-    var soil_moisture = @json($days_avg["soil_moisture"]);
-    var pir = @json($days_avg["pir"]);
-    var ec_meter = @json($days_avg["ec_meter"]);
-    var light = @json($days_avg["light"]);
-    var pin = @json($days_avg["pin"]);
+    var data_day = @json($days_avg["element"]);
+    var $data = [];
+    $.each(data_day, function( index, value ) {
+        $data.push({
+            data: value,
+            label: index,
+            hidden: false,
+            fill: false,
+            borderColor: [
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+        });
+    });
 
     var ctx = document.getElementById("line-chart");
     var myChart = new Chart(ctx, {
         type: 'line',
         data: {
             labels: day,
-            datasets: [{
-                data: temperature,
-                label: "Nhiệt độ",
-                borderColor: "#e30015",
-                hidden: false,
-                fill: false
-            }, {
-                data: humidity,
-                label: "Độ ẩm",
-                borderColor: "#8e5ea2",
-                hidden: true,
-                fill: false
-            }, {
-                data: ph,
-                label: "Độ PH",
-                borderColor: "#da5698",
-                hidden: true,
-                fill: false
-            }, {
-                data: soil_moisture,
-                label: "Độ ẩm đất",
-                borderColor: "#ed5b39",
-                hidden: true,
-                fill: false
-            }, {
-                data: pir,
-                label: "PIR",
-                borderColor: "#12c414",
-                hidden: true,
-                fill: false
-            }, {
-                data: ec_meter,
-                label: "EC_meter",
-                borderColor: "#4c38c4",
-                hidden: true,
-                fill: false
-            }, {
-                data: light,
-                label: "Ánh sáng",
-                borderColor: "#c41282",
-                hidden: true,
-                fill: false
-            }, {
-                data: pin,
-                label: "Pin",
-                borderColor: "#2cbbc4",
-                hidden: true,
-                fill: false
-            }
-            ]
+            datasets: $data
         },
         options: {
             title: {

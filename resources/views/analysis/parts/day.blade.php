@@ -14,15 +14,16 @@
     var data_day = @json($days_avg["element"]);
     var $data = [];
     $.each(data_day, function( index, value ) {
+        $ramdomColor = getRandomColor();
         $data.push({
             data: value,
             label: index,
             hidden: false,
             fill: false,
-            borderColor: [
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 159, 64, 1)'
-            ],
+            pointRadius: 5,
+            pointHoverRadius: 8,
+            backgroundColor: $ramdomColor,
+            borderColor: $ramdomColor,
         });
     });
 
@@ -37,9 +38,25 @@
             title: {
                 display: true,
                 text: 'Bảng phân tích yếu tố thời tiết trung bình theo từng ngày'
-            }
+            },
+            tooltips: {
+                mode: 'index',
+                intersect: false,
+            },
+            hover: {
+                mode: 'nearest',
+                intersect: true
+            },
         }
     });
+    function getRandomColor() {
+        var letters = '0123456789ABCDEF'.split('');
+        var color = '#';
+        for (var i = 0; i < 6; i++ ) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
 </script>
 @endpush
 

@@ -25,29 +25,37 @@ class AnalysisController extends Controller
     //Tính trung bình theo ngày
     public function analysisByDay(Request $request)
     {
+        $node_distinct = Weather::select("node")->distinct()->get();
         if ($request->all()) {
             $nodes1 = $request->nodes;
+            if(!$nodes1) return view('analysis.by_day')->with("nodes", $node_distinct);
             $element = $request->element;
             $start_date = Carbon::createFromTimeString($request->start_date . "00:00:00");
             $end_date = Carbon::createFromTimeString($request->end_date . "00:00:00");
             $data = $this->getByDay($nodes1, $element, $start_date, $end_date);
             return view('analysis.by_day')->with([
                     "days_avg" => $data,
-                    "nodes" => Weather::select("node")->distinct()->get()
+                    "nodes" => $node_distinct
                 ]);
         }
-        $nodes = Weather::select("node")->distinct()->get();
-        return view('analysis.by_day')->with("nodes", $nodes);
+        return view('analysis.by_day')->with("nodes", $node_distinct);
     }
 
     //Tính trung bình theo giờ trong ngày
     public function analysisByHour(Request $request)
     {
+        $node_distinct = Weather::select("node")->distinct()->get();
         if ($request->all()) {
-            $data = $this->getByHour($request->date);
-            return view('analysis.by_hour')->with("hours_avg", $data);
+            $nodes1 = $request->nodes;
+            if(!$nodes1) return view('analysis.by_hour')->with("nodes", $node_distinct);
+            $element = $request->element;
+            $data = $this->getByHour($nodes1, $element, $request->date);
+            return view('analysis.by_hour')->with([
+                "hours_avg" => $data,
+                "nodes" => $node_distinct
+            ]);
         }
-        return view('analysis.by_hour');
+        return view('analysis.by_hour')->with("nodes", $node_distinct);
     }
 
     //Tính trung bình theo phút trong ngày giờ
@@ -92,33 +100,24 @@ class AnalysisController extends Controller
         return $result;
     }
 
-    public function getByHour($date) {
+    public function getByHour($nodes, $element, $date) {
         $hours = [];
         for($hour = 0; $hour < 24; $hour++) {
             $hours[] = str_pad($hour, 2, '0', STR_PAD_LEFT);
         }
         $result = [];
         $result["hour"] = $hours;
-        $result["temperature"] = [];
-        $result["humidity"] = [];
-        $result["ph"] = [];
-        $result["soil_moisture"] = [];
-        $result["pir"] = [];
-        $result["ec_meter"] = [];
-        $result["light"] = [];
-        $result["pin"] = [];
-
-        foreach ($hours as $hour) {
-            $date_data = Weather::where('date', '>=', $date . " ". $hour . ":00:00")
-                ->where('date', '<', $date . " ". $hour . ":59:59")->get();
-            $result["temperature"][] = format_number($date_data->avg("temperature"));
-            $result["humidity"][] = format_number($date_data->avg("humidity"));
-            $result["ph"][] = format_number($date_data->avg("ph"));
-            $result["soil_moisture"][] = format_number($date_data->avg("soil_moisture"));
-            $result["pir"][] = format_number($date_data->avg("pir"));
-            $result["ec_meter"][] = format_number($date_data->avg("ec_meter"));
-            $result["light"][] = format_number($date_data->avg("light"));
-            $result["pin"][] = format_number($date_data->avg("pin"));
+        $result["element"] = [];
+        foreach ($nodes as $node) {
+            $date_element = [];
+            foreach ($hours as $hour) {
+                $date_data = Weather::where('date', '>=', $date . " ". $hour . ":00:00")
+                    ->where('date', '<', $date . " ". $hour . ":59:59")
+                    ->where('node', "=", $node)
+                    ->get();
+                $date_element[] = format_number($date_data->avg($element));
+            }
+            $result["element"][$node] = $date_element;
         }
         return $result;
     }
